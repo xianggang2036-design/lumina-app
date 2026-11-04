@@ -93,3 +93,28 @@ app.get("/api/history", async (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 服务已成功运行在 http://localhost:${PORT}`));
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+// 解析 JSON 请求体
+app.use(express.json());
+
+// 1. 根目录欢迎页（解决 Cannot GET /）
+app.get('/', (req, res) => {
+  res.send('Lumina AI Lead Qualification System is Running! 🚀');
+});
+
+// 2. 测试接口（解决 /test 打不开的问题）
+app.get('/test', (req, res) => {
+  res.json({
+    status: 'success',
+    message: 'Test route is working perfectly!',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// 启动服务监听端口
+app.listen(port, () => {
+  console.log(`🚀 服务已成功运行在端口 ${port}`);
+});
